@@ -42,10 +42,10 @@ No build tools or dependencies required!
 
 - Designed & developed by Ayush Singh, Kunal Datkhile, Prathmesh Achare, and Alby John.
 - Connect on 
-[LinkedIn](www.linkedin.com/in/ayush-singh-b1901335b).
-[LinkedIn](www.linkedin.com/in/kunal-datkhile-54945734a).
-[LinkedIn](www.linkedin.com/in/prathmesh-achare-13aa32395).
-[LinkedIn](www.linkedin.com/in/alby-john-4409383a6).
+Ayush [LinkedIn](www.linkedin.com/in/ayush-singh-b1901335b).
+Kunal [LinkedIn](www.linkedin.com/in/kunal-datkhile-54945734a).
+Prathmesh[LinkedIn](www.linkedin.com/in/prathmesh-achare-13aa32395).
+Alby[LinkedIn](www.linkedin.com/in/alby-john-4409383a6).
 
 
 
