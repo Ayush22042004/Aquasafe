@@ -34,6 +34,7 @@
                 <li><a href="#tips">Conservation Tips</a></li>
                 <li><a href="#checklist">Checklist</a></li>
                 <li><a href="#resources">Resources</a></li>
+                <li><a href="#quiz">Quiz</a></li>
                 <li><a href="#contact">Contact Us</a></li>
             </ul>
             <button class="mobile-menu-btn">☰</button>
@@ -157,7 +158,7 @@
                         <label>🚿 Showers per person per day</label>
                         <div class="input-row">
                             <input type="number" id="showers" min="0" max="5" value="1">
-                            <span class="input-helper">Avg. duration (min): <input type="number" id="showerDuration" min="1" max="30" value="8" style="width:50px;"> × 9 l/min</span>
+                            <span class="input-helper">Avg. duration (min): <input type="number" id="showerDuration" min="1" max="30" value="8" style="width:70px;"> × 9 Litre/min</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -592,6 +593,22 @@
         </div>
     </section>
 
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">Quick Quiz</h2>
+            <p class="section-subtitle">Test your knowledge and climb the leaderboard!</p>
+            <div id="quiz-container">
+                <div id="quiz-start">
+                    <button id="startQuizBtn" class="cta-button">Start Quiz</button>
+                </div>
+            </div>
+            <div style="margin-top:20px;">
+                <a href="leaderboard.html" class="cta-button">View Leaderboard</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Us Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -654,6 +671,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- Footer -->
     <footer class="footer">
@@ -712,6 +730,28 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- AI Assistant Chat Widget -->
+    <div id="aiAssistant" class="ai-assistant">
+        <button id="aiToggleBtn" class="ai-toggle-btn" title="Open AI Assistant">
+            <span class="ai-icon">🤖</span>
+        </button>
+        <div id="aiChatBox" class="ai-chat-box">
+            <div class="ai-header">
+                <h3>💧 AquaSave AI Helper</h3>
+                <button id="aiCloseBtn" class="ai-close-btn">✕</button>
+            </div>
+            <div id="aiMessages" class="ai-messages">
+                <div class="ai-message bot-message">
+                    <p>Hello! 👋 I'm your AquaSave AI assistant. Ask me anything about water conservation, usage tips, or environmental impact. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="ai-input-area">
+                <input type="text" id="aiInput" placeholder="Ask about water conservation..." />
+                <button id="aiSendBtn" class="ai-send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@google/genai": "^1.42.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
