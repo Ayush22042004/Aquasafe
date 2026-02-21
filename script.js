@@ -232,7 +232,7 @@ function initContactForm() {
 /* =====================================================
    🤖 AI ASSISTANT — WORKING VERSION
 ===================================================== */
-
+const GEMINI_API_KEY = "AIzaSyCGOijPrRLcc7bTbViz-HgUJW238aUSbjU";
 function initAIAssistant() {
   const toggleBtn = document.getElementById("aiToggleBtn");
   const closeBtn = document.getElementById("aiCloseBtn");
@@ -257,20 +257,6 @@ function initAIAssistant() {
   });
 }
 
-function getApiKey() {
-  return localStorage.getItem("aquasave-api-key");
-}
-
-function promptForApiKey() {
-  const key = prompt("Paste your Gemini API key:");
-  if (key && key.trim()) {
-    localStorage.setItem("aquasave-api-key", key.trim());
-    alert("API key saved. Send message again.");
-    return true;
-  }
-  return false;
-}
-
 async function sendAIMessage() {
   const input = document.getElementById("aiInput");
   const messages = document.getElementById("aiMessages");
@@ -278,12 +264,6 @@ async function sendAIMessage() {
 
   const message = input.value.trim();
   if (!message) return;
-
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    if (promptForApiKey()) return;
-    return;
-  }
 
   // user bubble
   const userDiv = document.createElement("div");
@@ -308,7 +288,7 @@ async function sendAIMessage() {
     const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 second timeout
     
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
