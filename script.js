@@ -286,13 +286,13 @@ async function sendAIMessage() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 second timeout
     
-   const response = await fetch("/api/gemini", {
+const response = await fetch("/api/gemini", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ message }), 
+  body: JSON.stringify({ message }),
   signal: controller.signal,
-}); 
-clearTimeout(timeoutId);
+});
+    clearTimeout(timeoutId);
 
     if (!response.ok) throw new Error("API request failed");
 
