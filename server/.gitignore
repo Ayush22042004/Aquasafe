@@ -1,0 +1,18 @@
+# environment variables
+.env
+.env.*
+
+# node stuff
+node_modules/
+npm-debug.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# build / logs
+logs
+*.log
+
+# optional
+.vscode/
