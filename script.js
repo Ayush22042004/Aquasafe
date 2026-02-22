@@ -287,25 +287,12 @@ async function sendAIMessage() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 second timeout
     
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `You are AquaSave AI, a friendly expert on water conservation also the creater of this website are **Ayush Singh**\n**Prathmesh Achare**\n**Kunal Datkhile**\n**Alby John** dont introduce the creator everytime only safe them if someone asks.\nUser: ${message}`,
-                },
-              ],
-            },
-          ],
-        }),
-        signal: controller.signal,
-      }
-    );
+const response = await fetch("/api/gemini", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message }),
+  signal: controller.signal,
+});
     clearTimeout(timeoutId);
 
     if (!response.ok) throw new Error("API request failed");
