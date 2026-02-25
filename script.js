@@ -47,21 +47,73 @@ function initNavigation() {
 ===================================================== */
 function initCalculator() {
   const btn = document.getElementById("calculateBtn");
-  const inputs = ["showers", "showerDuration"];
+  // list of all input/select ids used by the calculator
+  const ids = [
+    "household",
+    "showers",
+    "showerDuration",
+    "baths",
+    "flushes",
+    "toiletType",
+    "brushing",
+    "dishwasher",
+    "handwashDishes",
+    "laundry",
+    "machineType",
+    "watering",
+  ];
 
   if (btn) btn.addEventListener("click", calculateWaterUsage);
 
-  inputs.forEach((id) => {
+  ids.forEach((id) => {
     const elem = document.getElementById(id);
-    if (elem) elem.addEventListener("input", calculateWaterUsage);
+    if (elem) {
+      // selects should listen for change, number fields can use input
+      const eventType = elem.tagName.toLowerCase() === "select" ? "change" : "input";
+      elem.addEventListener(eventType, calculateWaterUsage);
+    }
   });
+
+  // perform an initial calculation so results aren't blank when page loads
+  calculateWaterUsage();
 }
 
 function calculateWaterUsage() {
+  const household = +document.getElementById("household")?.value || 0;
   const showers = +document.getElementById("showers")?.value || 0;
   const duration = +document.getElementById("showerDuration")?.value || 0;
+  const baths = +document.getElementById("baths")?.value || 0;
+  const flushes = +document.getElementById("flushes")?.value || 0;
+  const toiletType = document.getElementById("toiletType")?.value || "modern";
+  const brushing = +document.getElementById("brushing")?.value || 0;
+  const dishwasher = +document.getElementById("dishwasher")?.value || 0;
+  const handwashDishes = +document.getElementById("handwashDishes")?.value || 0;
+  const laundry = +document.getElementById("laundry")?.value || 0;
+  const machineType = document.getElementById("machineType")?.value || "front";
+  const watering = +document.getElementById("watering")?.value || 0;
 
-  const dailyTotal = showers * duration * 9;
+  // compute per-person daily usage in litres
+  let dailyPerPerson = 0;
+  dailyPerPerson += showers * duration * 9; // shower litres/day
+  dailyPerPerson += (baths * 135) / 7; // baths per week -> per day
+
+  let flushVolume = 6;
+  if (toiletType === "dual") flushVolume = 4;
+  else if (toiletType === "old") flushVolume = 13;
+  dailyPerPerson += flushes * flushVolume;
+
+  dailyPerPerson += brushing * 7.5; // brushing litres
+  dailyPerPerson += (dishwasher * 22) / 7; // dishwasher loads/week -> per day
+  dailyPerPerson += handwashDishes * 9; // hand-washing litres
+
+  let laundryVolume = 60;
+  if (machineType === "top") laundryVolume = 120;
+  else if (machineType === "semi") laundryVolume = 80;
+  dailyPerPerson += (laundry * laundryVolume) / 7; // laundry loads/week -> per day
+
+  dailyPerPerson += (watering * 15) / 7; // watering garden/week -> per day
+
+  const dailyTotal = dailyPerPerson * household;
   const monthlyTotal = dailyTotal * 30;
   const yearlyTotal = dailyTotal * 365;
 
@@ -70,20 +122,20 @@ function calculateWaterUsage() {
   animateNumber("yearlyUsage", yearlyTotal);
 
   const feedback = document.getElementById("feedback");
-  if (!feedback) return;
-
-  if (dailyTotal < 50) {
-    feedback.textContent =
-      "Excellent! You're a water conservation champion!";
-    feedback.style.color = "#27ae60";
-  } else if (dailyTotal < 100) {
-    feedback.textContent =
-      "Good! Keep up with your water conservation efforts.";
-    feedback.style.color = "#3498db";
-  } else {
-    feedback.textContent =
-      "Try to reduce your daily water usage with our tips!";
-    feedback.style.color = "#e74c3c";
+  if (feedback) {
+    if (dailyTotal < 50) {
+      feedback.textContent =
+        "Excellent! You're a water conservation champion!";
+      feedback.style.color = "#27ae60";
+    } else if (dailyTotal < 100) {
+      feedback.textContent =
+        "Good! Keep up with your water conservation efforts.";
+      feedback.style.color = "#3498db";
+    } else {
+      feedback.textContent =
+        "Try to reduce your daily water usage with our tips!";
+      feedback.style.color = "#e74c3c";
+    }
   }
 }
 
