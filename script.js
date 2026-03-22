@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTips();
   initChecklist();
   initScrollEffects();
-  initContactForm();
   initQuiz();
   initLeaderboard();
   initAIAssistant();
@@ -252,35 +251,6 @@ function initScrollEffects() {
     .querySelectorAll(".fact-card, .tip-item, .resource-card")
     .forEach((el) => observer.observe(el));
 }
-
-/* =====================================================
-   CONTACT FORM
-===================================================== */
-function initContactForm() {
-  const form = document.getElementById("contactForm");
-  if (!form) return;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("contactName")?.value.trim();
-    const email = document.getElementById("contactEmail")?.value.trim();
-    const message = document.getElementById("contactMessage")?.value.trim();
-
-    if (!name || !email || !message) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    if (!email.includes("@")) {
-      alert("Please enter a valid email");
-      return;
-    }
-
-    form.submit();
-  });
-}
-
 /* =====================================================
    🤖 AI ASSISTANT — WORKING VERSION
 ===================================================== */
